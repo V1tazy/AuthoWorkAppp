@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="WindowsRootStyle" TargetType="DockPanel">
+        <Setter Property="Height" Value="20"></Setter>
+        <Setter Property="DockPanel.Dock" Value="Top"></Setter>
+    </Style>
+
+    <Style x:Key="BaseWindowBtn" TargetType="Button">
+        <Setter Property="Background" Value="Gray"></Setter>
+        <Setter Property="Width" Value="30"></Setter>
+    </Style>
+    
+    
+    <Style x:Key="WindowCloseBtn" TargetType="Button" BasedOn="{StaticResource BaseWindowBtn}">
+    </Style>
+
+    <Style x:Key="WindowMaxBtn" TargetType="Button" BasedOn="{StaticResource BaseWindowBtn}">
+    </Style>
+
+    <Style x:Key="WindowMinBtn" TargetType="Button" BasedOn="{StaticResource BaseWindowBtn}">
+    </Style>
+
+    <Style x:Key="AuthBtnBase" TargetType="Button">
+        <Setter Property="Background" Value="Azure"></Setter>
+    </Style>
+
+
+</ResourceDictionary>
