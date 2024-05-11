@@ -111,14 +111,14 @@ namespace AuthoWorkAppp.ViewModel
                 CurrentUserAccount = new UserAccountModel()
                 {
                     Username = user.Username,
-                    DisplayName = $"Welcome to the cumzone {user.Name}",
+                    DisplayName = $"{user.Name}",
                     ProfilePicture = null
                 };
             }
             else
             {
-                MessageBox.Show("Ошибка пользователь неавторизирован", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Error);
-                Application.Current.Shutdown();
+                //MessageBox.Show("Ошибка пользователь неавторизирован", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Error);
+                // Application.Current.Shutdown();
             }
         }
     }

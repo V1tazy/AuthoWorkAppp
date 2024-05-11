@@ -19,22 +19,40 @@
     <DockPanel Background="#FFCF48">
         <component:XromWindowControl DockPanel.Dock="Top" Background="Gray" Header="Личный кабинет"/>
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <DockPanel VerticalAlignment="Top" Height="40" Background="White">
-                <TextBlock Text="{Binding CurrentUserAccount.DisplayName}"></TextBlock>
-                <Button HorizontalAlignment="Right" Background="White" BorderBrush="White" Command="{Binding AdminCommand}">
-                    <Button.Visibility>
-                        <Binding Path="IsVisible" Mode="TwoWay" Converter="{StaticResource BooleanToVisibility}"></Binding>
-                    </Button.Visibility>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Background="#9966cc">
+                
+            </Grid>
+            <StackPanel>
+                <Button Background="#9966CC" BorderThickness="0" Height="50" Width="200">
+                        <Button.Content>
+                            <Grid Width="200" Height="40">
+                                <Image Source="\Assets\img\user.png" Width="40" Height="40" HorizontalAlignment="Left"></Image>
+                                <TextBlock Text="{Binding CurrentUserAccount.DisplayName}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                            </Grid>
+                        </Button.Content>
+                </Button>
+                <Button Background="#9966CC" Height="50" Width="200">
                     <Button.Content>
-                        <Image Height="40" Width="40" Source="/Assets/img/menu.png"></Image>
+                        <Grid Width="200" Height="40">
+                            <Image Source="/Assets/img/calendar.png" HorizontalAlignment="Left" Width="40" Height="40"></Image>
+                            <TextBlock Text="Планер" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
                     </Button.Content>
                 </Button>
-            </DockPanel>
-            <ContentControl x:Name="Pages" Content="{Binding CurrentView}" Grid.Row="1"></ContentControl>
+                <Button Background="#9966CC" Height="50" Width="200">
+                    <Button.Content>
+                        <Grid Height="40" Width="200">
+                            <Image Source="/Assets/img/admin.png" Height="40" Width="40" HorizontalAlignment="Left"/>
+                            <TextBlock Text="Админ" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+            <ContentControl x:Name="Pages" Content="{Binding CurrentView}" Grid.Column="1"></ContentControl>
         </Grid>
     </DockPanel>
 </Window>
