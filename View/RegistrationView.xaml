@@ -30,8 +30,9 @@
                         <TextBox VerticalAlignment="Center" Margin="5" Text="{Binding Username}"/>
                         <TextBox VerticalAlignment="Center" Margin="5" Text="{Binding Email}"/>
                         <TextBox VerticalAlignment="Center" Margin="5" Text="{Binding Fullname}"/>
-                        <component:bindablePasswordBoxControl VerticalAlignment="Center" Margin="5"/>
-                        <Button Margin="5 30 5 5" Height="30" Width="200" Background="White" Content="Зарегестрироваться"></Button>
+                        <TextBox VerticalAlignment="Center" Margin="5" Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        <Button Margin="5 30 5 5" Height="30" Width="200" Background="White" Content="Зарегестрироваться" Command="{Binding RegistationCommand}"></Button>
+                        <TextBlock Text="{Binding Errormessage}"></TextBlock>
                     </StackPanel>
                 </Grid>
             </Border>

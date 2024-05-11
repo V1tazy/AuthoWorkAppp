@@ -4,8 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AuthoWorkAppp.View"
+        xmlns:component ="clr-namespace:AuthoWorkAppp.Assets.customElement"
+        xmlns:vm ="clr-namespace:AuthoWorkAppp.ViewModel"
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
-    <Grid>
-    </Grid>
+        Title="MainView" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize">
+
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+    <DockPanel Background="#FFCF48">
+        <component:XromWindowControl DockPanel.Dock="Top" Background="Gray" Header="Личный кабинет"/>
+        <Grid>
+            <DockPanel VerticalAlignment="Top" Height="40" Background="White">
+                <TextBlock>dadad</TextBlock>
+                <Button HorizontalAlignment="Right" Background="White" BorderBrush="White" Command="{Binding AdminCommand}">
+                    <Button.Content>
+                        <Image Height="40" Width="40" Source="/Assets/img/menu.png"></Image>
+                    </Button.Content>
+                </Button>
+            </DockPanel>
+            <ContentControl x:Name="Pages" Content="{Binding CurrentView}"></ContentControl>
+        </Grid>
+    </DockPanel>
 </Window>

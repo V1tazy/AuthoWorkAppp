@@ -16,7 +16,7 @@ namespace AuthoWorkAppp.ViewModel
     {
         #region Fields
         private string _username;
-        private SecureString _password;
+        private string _password;
         private string _email;
         private string _fullname;
         private string _errormessage;
@@ -32,7 +32,7 @@ namespace AuthoWorkAppp.ViewModel
                 OnPropertyChanged(nameof(Username));
             } 
         }
-        public SecureString Password { 
+        public string Password { 
             get => _password;
             set 
             { 
@@ -107,16 +107,16 @@ namespace AuthoWorkAppp.ViewModel
 
         private void ExecuteRegistrationCommand(object obj)
         {
-            bool isUserExist = userRepository.GetExistUserByName(Username) 
-                || userRepository.GetExistUserByEmail(Email);
-            if (!isUserExist)
+            bool isUserExist = userRepository.GetExistUserByName(Username) && userRepository.GetExistUserByEmail(Email);
+            if (isUserExist)
             {
                 userRepository.Add(new UserModel
                 {
                     Username = Username,
                     Email = Email,
-                    Password = Password.ToString(),
-                    Name = Fullname
+                    Password = Password,
+                    Name = "Пользователь",
+                    LastName = "Пользователь"
                 });
             }
             else

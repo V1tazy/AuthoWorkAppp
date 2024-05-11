@@ -56,7 +56,11 @@
                                 </Style>
                             </Button.Resources>
                         </Button>
-                        <Button x:Name="btnRegistation" Content="хуй"></Button>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="5" Text="У вас нет аккаунта?"/>
+                            <Button x:Name="btnRegistation" Content="Зарегестрируйтесь" 
+                                    Foreground="Blue" Background="#9966CC" BorderBrush="#9966CC"></Button>
+                        </StackPanel>
                     </StackPanel>
                 </Grid>
             </Border>
