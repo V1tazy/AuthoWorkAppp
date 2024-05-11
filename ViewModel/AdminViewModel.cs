@@ -23,7 +23,7 @@ namespace AuthoWorkAppp.ViewModel
             set 
             { 
                 userModels = value;
-                OnPropertyChanged(nameof(userModels));
+                OnPropertyChanged(nameof(UserModels));
             }
         }
 
@@ -36,7 +36,7 @@ namespace AuthoWorkAppp.ViewModel
         public AdminViewModel()
         {
             userRepository = new UserRepository();
-            userModels = userRepository.GetAll();
+            UserModels = userRepository.GetAll();
         }
         #endregion
     }

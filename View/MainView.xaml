@@ -12,18 +12,29 @@
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+    </Window.Resources>
     <DockPanel Background="#FFCF48">
         <component:XromWindowControl DockPanel.Dock="Top" Background="Gray" Header="Личный кабинет"/>
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
             <DockPanel VerticalAlignment="Top" Height="40" Background="White">
-                <TextBlock>dadad</TextBlock>
+                <TextBlock Text="{Binding CurrentUserAccount.DisplayName}"></TextBlock>
                 <Button HorizontalAlignment="Right" Background="White" BorderBrush="White" Command="{Binding AdminCommand}">
+                    <Button.Visibility>
+                        <Binding Path="IsVisible" Mode="TwoWay" Converter="{StaticResource BooleanToVisibility}"></Binding>
+                    </Button.Visibility>
                     <Button.Content>
                         <Image Height="40" Width="40" Source="/Assets/img/menu.png"></Image>
                     </Button.Content>
                 </Button>
             </DockPanel>
-            <ContentControl x:Name="Pages" Content="{Binding CurrentView}"></ContentControl>
+            <ContentControl x:Name="Pages" Content="{Binding CurrentView}" Grid.Row="1"></ContentControl>
         </Grid>
     </DockPanel>
 </Window>

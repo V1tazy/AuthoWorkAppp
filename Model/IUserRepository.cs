@@ -16,6 +16,8 @@ namespace AuthoWorkAppp.Model
         bool GetExistUserByName(string username);
 
         bool GetExistUserByEmail(string email);
+
+        bool CheckAdminUser(string username);
         UserModel GetById(int id);
         UserModel GetByUsername(string username);
         IEnumerable<UserModel> GetAll();

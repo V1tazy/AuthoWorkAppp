@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using AuthoWorkAppp.View;
+using AuthoWorkAppp.ViewModel;
 
 namespace AuthoWorkAppp
 {

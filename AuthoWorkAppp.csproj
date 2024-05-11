@@ -75,6 +75,7 @@
       <DependentUpon>XromWindowControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\IUserRepository.cs" />
+    <Compile Include="Model\UserAccountModel.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\UserRepository.cs" />

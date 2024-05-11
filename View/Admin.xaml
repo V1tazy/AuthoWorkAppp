@@ -7,11 +7,19 @@
              xmlns:vm ="clr-namespace:AuthoWorkAppp.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
     <UserControl.DataContext>
-        <vm:AdminViewModel></vm:AdminViewModel>
+        <vm:AdminViewModel/>
     </UserControl.DataContext>
-    
-    <Grid>
-        <ComboBox ItemsSource="{Binding UserModels}"></ComboBox>
+    <Grid   Background="#FFCF48" >
+        <Border CornerRadius="10" Background="#00FA9A"  Height="300" Width="500">
+            <StackPanel VerticalAlignment="Center" Width="400">
+                <ComboBox ItemsSource="{Binding UserModels}" DisplayMemberPath="Username" Width="200"></ComboBox>
+
+                <TextBox Margin="5" HorizontalAlignment="Center" Width="200" Text="{Binding Username}"/>
+                <TextBox Margin="5" HorizontalAlignment="Center" Width="200" Text="{Binding Password}"/>
+
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

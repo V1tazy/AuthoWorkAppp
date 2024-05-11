@@ -54,6 +54,14 @@ namespace AuthoWorkAppp.Repositories
             return validUser;
         }
 
+        public bool CheckAdminUser(string username)
+        {
+            if (username == "admin")
+                return true;
+            else
+                return false;
+        }
+
         public void Edit(UserModel userModel)
         {
             throw new NotImplementedException();
@@ -61,32 +69,33 @@ namespace AuthoWorkAppp.Repositories
 
         public IEnumerable<UserModel> GetAll()
         {
-            IEnumerable<UserModel> userModels = new ObservableCollection<UserModel>();
-            using(var connection = GetConnection())
-            using(var command = new SqlCommand())
+            var userModels = new List<UserModel>(); 
+
+            using (var connection = GetConnection())
+            using (var command = new SqlCommand("SELECT * FROM [User]", connection))
             {
                 connection.Open();
-                command.Connection = connection;
-                command.CommandText = "select * from [User]";
-                
-                using(var reader =  command.ExecuteReader())
+
+                using (var reader = command.ExecuteReader())
                 {
-                    while(reader.Read()) 
+                    while (reader.Read())
                     {
-                        userModels.Append(new UserModel
+                        var userModel = new UserModel
                         {
                             Id = reader["Id"].ToString(),
                             Username = reader["Username"].ToString(),
                             Password = reader["Password"].ToString(),
                             Name = reader["Name"].ToString(),
                             LastName = reader["LastName"].ToString(),
-                            Email = reader["email"].ToString(),
-                        });
+                            Email = reader["Email"].ToString(),
+                        };
+                        userModels.Add(userModel); 
                     }
                 }
             }
             return userModels;
         }
+
 
         public UserModel GetById(int id)
         {
@@ -95,7 +104,33 @@ namespace AuthoWorkAppp.Repositories
 
         public UserModel GetByUsername(string username)
         {
-            throw new NotImplementedException();
+            UserModel user = null;
+
+            using(var connection = GetConnection())
+            using(var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "select * from [User] where username = @username";
+                command.Parameters.Add("@username", System.Data.SqlDbType.NVarChar).Value = username;
+
+                using(var reader = command.ExecuteReader())
+                {
+                    if(reader.Read())
+                    {
+                        user = new UserModel()
+                        {
+                            Id = reader[0].ToString(),
+                            Username = reader[1].ToString(),
+                            Password = string.Empty,
+                            Name = reader[3].ToString(),
+                            LastName = reader[4].ToString(),
+                            Email = reader[5].ToString(),
+                        };
+                    }
+                }
+            }
+            return user;
         }
 
         public bool GetExistUserByEmail(string email)
