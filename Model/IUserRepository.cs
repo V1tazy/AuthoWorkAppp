@@ -12,13 +12,13 @@ namespace AuthoWorkAppp.Model
         bool AuthenticateUser(NetworkCredential credential);
         void Add(UserModel userModel);
         void Edit(UserModel userModel);
-        void Remove(int id);
+        void Remove(string id);
         bool GetExistUserByName(string username);
 
         bool GetExistUserByEmail(string email);
 
         bool CheckAdminUser(string username);
-        UserModel GetById(int id);
+        UserModel GetById(string id);
         UserModel GetByUsername(string username);
         IEnumerable<UserModel> GetAll();
     }

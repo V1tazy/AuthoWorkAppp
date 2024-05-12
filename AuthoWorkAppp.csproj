@@ -74,9 +74,12 @@
     <Compile Include="Assets\customElement\XromWindowControl.xaml.cs">
       <DependentUpon>XromWindowControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\IPlanerRepository.cs" />
     <Compile Include="Model\IUserRepository.cs" />
+    <Compile Include="Model\PlanerEventModel.cs" />
     <Compile Include="Model\UserAccountModel.cs" />
     <Compile Include="Model\UserModel.cs" />
+    <Compile Include="Repositories\PlanerEventRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="ViewModel\AdminViewModel.cs" />

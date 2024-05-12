@@ -27,7 +27,7 @@
                 
             </Grid>
             <StackPanel>
-                <Button Background="#9966CC" BorderThickness="0" Height="50" Width="200">
+                <Button Background="#9966CC" BorderThickness="0" Height="50" Width="200" Command="{Binding PersonalCommand}">
                         <Button.Content>
                             <Grid Width="200" Height="40">
                                 <Image Source="\Assets\img\user.png" Width="40" Height="40" HorizontalAlignment="Left"></Image>
@@ -35,7 +35,7 @@
                             </Grid>
                         </Button.Content>
                 </Button>
-                <Button Background="#9966CC" Height="50" Width="200">
+                <Button Background="#9966CC" Height="50" Width="200" Command="{Binding PlannerCommand}">
                     <Button.Content>
                         <Grid Width="200" Height="40">
                             <Image Source="/Assets/img/calendar.png" HorizontalAlignment="Left" Width="40" Height="40"></Image>
@@ -43,13 +43,17 @@
                         </Grid>
                     </Button.Content>
                 </Button>
-                <Button Background="#9966CC" Height="50" Width="200">
+                <Button Background="#9966CC" Height="50" Width="200" Command="{Binding AdminCommand}">
                     <Button.Content>
                         <Grid Height="40" Width="200">
                             <Image Source="/Assets/img/admin.png" Height="40" Width="40" HorizontalAlignment="Left"/>
                             <TextBlock Text="Админ" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Grid>
                     </Button.Content>
+                    <Button.Visibility>
+                        <Binding Path="IsVisible" Mode="TwoWay" Converter="{StaticResource BooleanToVisibility}"></Binding>
+                    </Button.Visibility>
+
                 </Button>
             </StackPanel>
             <ContentControl x:Name="Pages" Content="{Binding CurrentView}" Grid.Column="1"></ContentControl>

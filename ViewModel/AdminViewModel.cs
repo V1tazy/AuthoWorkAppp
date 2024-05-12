@@ -15,8 +15,19 @@ namespace AuthoWorkAppp.ViewModel
         #region Field
         private UserRepository userRepository = new UserRepository();
         private IEnumerable<UserModel> userModels;
+        private UserModel _currentUser;
         #endregion
 
+
+        public UserModel CurrentUser
+        {
+            get => _currentUser;
+            set
+            {
+                _currentUser = value;
+                OnPropertyChanged(nameof(CurrentUser));
+            }
+        }
         public IEnumerable<UserModel> UserModels
         {
             get { return userModels; }
@@ -28,8 +39,39 @@ namespace AuthoWorkAppp.ViewModel
         }
 
         #region Commands
-        ICommand AdminEditCommand { get; }
-        ICommand AdminDeleteCommand { get; }
+        public ICommand AdminEditCommand { get; }
+        public ICommand AdminDeleteCommand { get; }
+        #endregion
+
+        #region Edit
+        private bool CanExecuteEditCommand(object obj)
+        {
+            if (CurrentUser != null && CurrentUser.Username != "admin")
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void ExecuteEditCommand(object obj)
+        {
+            userRepository.Edit(CurrentUser);
+            UserModels = userRepository.GetAll();
+        }
+        private bool CanExecutedDeletedCommand(object obj)
+        {
+            if(CurrentUser != null && CurrentUser.Username != "admin")
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void ExecuteDeleteCommand(object obj)
+        {
+            userRepository.Remove(CurrentUser.Id);
+            UserModels = userRepository.GetAll();
+        }
         #endregion
 
         #region Constructor
@@ -37,6 +79,8 @@ namespace AuthoWorkAppp.ViewModel
         {
             userRepository = new UserRepository();
             UserModels = userRepository.GetAll();
+            AdminEditCommand = new ViewModelCommand(ExecuteEditCommand, CanExecuteEditCommand);
+            AdminDeleteCommand = new ViewModelCommand(ExecuteDeleteCommand, CanExecutedDeletedCommand);
         }
         #endregion
     }

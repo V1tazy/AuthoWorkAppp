@@ -12,5 +12,7 @@
     </UserControl.DataContext>
     <Grid Margin="15" Background="Wheat">
         <Border CornerRadius="0, 20, 20, 0"></Border>
+        <ComboBox ItemsSource="{Binding PlannerEvents}" SelectedItem="{Binding CurrentPlanerEvent, Mode=TwoWay}" DisplayMemberPath="EventName"></ComboBox>
     </Grid>
 </UserControl>
+    

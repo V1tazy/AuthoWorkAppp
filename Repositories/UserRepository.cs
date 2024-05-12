@@ -63,8 +63,25 @@ namespace AuthoWorkAppp.Repositories
         }
 
         public void Edit(UserModel userModel)
-        {
-            throw new NotImplementedException();
+        {   
+            UserModel EditedUserModel = userModel;
+            using(var connection = GetConnection())
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = @" UPDATE [User] SET Password = @Password, Name = @Name, LastName = @LastName, Email = @Email
+                WHERE Id = @Id AND Username = @Username";
+                command.Parameters.AddWithValue("@Id", EditedUserModel.Id);
+                command.Parameters.AddWithValue("@Username", EditedUserModel.Username);
+                command.Parameters.AddWithValue("@Password", EditedUserModel.Password);
+                command.Parameters.AddWithValue("@Name", EditedUserModel.Name);
+                command.Parameters.AddWithValue("@LastName", EditedUserModel.LastName);
+                command.Parameters.AddWithValue("@Email", EditedUserModel.Email);
+
+
+                command.ExecuteScalar();
+            }
         }
 
         public IEnumerable<UserModel> GetAll()
@@ -97,9 +114,36 @@ namespace AuthoWorkAppp.Repositories
         }
 
 
-        public UserModel GetById(int id)
+        public UserModel GetById(string id)
         {
-            throw new NotImplementedException();
+            UserModel user = null;
+
+            using (var connection = GetConnection())
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "select * from [User] where Id = @Id";
+                command.Parameters.Add("@Id", System.Data.SqlDbType.UniqueIdentifier).Value = id;
+
+                using(var reader = command.ExecuteReader())
+                {
+                    if(reader.Read())
+                    {
+                        user = new UserModel()
+                        {
+                            Id = reader[0].ToString(),
+                            Username = reader[1].ToString(),
+                            Password = string.Empty,
+                            Name = reader[3].ToString(),
+                            LastName = reader[4].ToString(),
+                            Email = reader[5].ToString(),
+                        };
+                    }
+                }
+            }
+
+            return user;
         }
 
         public UserModel GetByUsername(string username)
@@ -166,7 +210,7 @@ namespace AuthoWorkAppp.Repositories
             return isUserExist;
         }
 
-        public void Remove(int id)
+        public void Remove(string id)
         {
         }
     }
