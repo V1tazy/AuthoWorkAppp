@@ -28,13 +28,6 @@ namespace AuthoWorkAppp
                     loginView.Close();
                 }
             };
-
-            loginView.btnRegistation.Click += (s, ev) =>
-            {
-                var registrationView = new RegistrationView();
-                registrationView.Show();
-                loginView.Close();
-            };
         }
     }
 }

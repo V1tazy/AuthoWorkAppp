@@ -19,13 +19,19 @@ namespace AuthoWorkAppp.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "INSERT INTO PlanerEvent(UserId, EventName, Description, Data)" +
-                    "Values(@UserId, @EventName, @Description, @Data)";
+                command.CommandText = "INSERT INTO PlanerEvent(UserId, EventName, Description, Date)" +
+                    "Values(@UserId, @EventName, @Description, @Date)";
 
-                command.Parameters.Add("@UserId", System.Data.SqlDbType.UniqueIdentifier).Value = userId;
+                Guid UserGuid;
+                if (!Guid.TryParse(userId, out UserGuid))
+                {
+                    throw new ArgumentException("UserId is not a valid GUID");
+                }
+
+                command.Parameters.Add("@UserId", System.Data.SqlDbType.UniqueIdentifier).Value = UserGuid;
                 command.Parameters.Add("@EventName", System.Data.SqlDbType.NVarChar).Value = planerEvent.EventName;
                 command.Parameters.Add("@Description", System.Data.SqlDbType.NVarChar).Value = planerEvent.Description;
-                command.Parameters.Add("@Data", System.Data.SqlDbType.NVarChar).Value = planerEvent.Date;
+                command.Parameters.Add("@Date", System.Data.SqlDbType.NVarChar).Value = planerEvent.Date;
 
                 command.ExecuteScalar();
 
@@ -35,7 +41,22 @@ namespace AuthoWorkAppp.Repositories
 
         public void Edit(string id)
         {
-            throw new NotImplementedException();
+            using(var connection =GetConnection())
+            using(var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "Update [PlanerEvent] SET Event = @EventName, Description = @Description, Data = @Data Where Id = @Id";
+
+                Guid PlanerGuid;
+                if (!Guid.TryParse(id, out PlanerGuid))
+                {
+                    throw new ArgumentException("UserId is not a valid GUID");
+                }
+
+                command.Parameters.Add("@Id", System.Data.SqlDbType.UniqueIdentifier).Value = PlanerGuid;
+                command.ExecuteScalar();
+            }
         }
 
         public IEnumerable<PlanerEventModel> GetAll(string userId)
@@ -77,7 +98,23 @@ namespace AuthoWorkAppp.Repositories
 
         public void Remove(string id)
         {
-            throw new NotImplementedException();
+            using(var connection = GetConnection())
+            using(var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "Delete From PlannerEvent Where Id = @Id";
+
+                Guid PlanerGuid;
+                if (!Guid.TryParse(id, out PlanerGuid))
+                {
+                    throw new ArgumentException("UserId is not a valid GUID");
+                }
+
+                command.Parameters.Add("@Id", System.Data.SqlDbType.UniqueIdentifier).Value = PlanerGuid;
+
+                command.ExecuteScalar();
+            }
         }
     }
 }

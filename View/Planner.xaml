@@ -11,8 +11,25 @@
         <vm:PlannerViewModel></vm:PlannerViewModel>
     </UserControl.DataContext>
     <Grid Margin="15" Background="Wheat">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Border CornerRadius="0, 20, 20, 0"></Border>
-        <ComboBox ItemsSource="{Binding PlannerEvents}" SelectedItem="{Binding CurrentPlanerEvent, Mode=TwoWay}" DisplayMemberPath="EventName"></ComboBox>
+        <StackPanel Margin="5">
+            <TextBox Margin="5" Text="{Binding EventName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Margin="5" Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Margin="5" Text="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+
+        <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal">
+            <Button Width="100" Content="Добавить" Command="{Binding PlannerAddCommand}"/>
+            <Button Width="100" Content="Очистить" Command="{Binding PlannerClearCommand}"/>
+            <Button Width="100" Content="Редактировать" Command="{Binding PlannerEditCommand}"/>
+            <Button Width="100" Content="Удалить" Command="{Binding PlannerDeleteCommand}"></Button>
+        </StackPanel>
+
+        <ListBox Grid.Column="1" ItemsSource="{Binding PlannerEvents}" SelectedItem="{Binding CurrentPlanerEvent, Mode=TwoWay}" DisplayMemberPath="EventName"></ListBox>
     </Grid>
 </UserControl>
     

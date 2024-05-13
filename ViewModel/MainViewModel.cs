@@ -117,8 +117,8 @@ namespace AuthoWorkAppp.ViewModel
             }
             else
             {
-                //MessageBox.Show("Ошибка пользователь неавторизирован", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Error);
-                // Application.Current.Shutdown();
+                MessageBox.Show("Ошибка пользователь неавторизирован", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Shutdown();
             }
         }
     }

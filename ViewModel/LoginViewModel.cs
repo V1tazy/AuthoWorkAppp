@@ -73,6 +73,7 @@ namespace AuthoWorkAppp.ViewModel
         public ICommand RecoverPasswordCommand { get;}
         public ICommand ShowPasswordCommand { get;}
         public ICommand RememberPasswordCommand { get;}
+
         #endregion
 
         #region Constructor

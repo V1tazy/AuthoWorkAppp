@@ -33,6 +33,10 @@
                         <TextBox VerticalAlignment="Center" Margin="5" Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                         <Button Margin="5 30 5 5" Height="30" Width="200" Background="White" Content="Зарегестрироваться" Command="{Binding RegistationCommand}"></Button>
                         <TextBlock Text="{Binding Errormessage}"></TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="У вас есть аккаунт?" VerticalAlignment="Center"/>
+                            <Button x:Name="btnLogin" Margin="5 0 0 0" Content="Войдите" Background="#9966cc" Foreground="Blue" BorderThickness="0"></Button>
+                        </StackPanel>
                     </StackPanel>
                 </Grid>
             </Border>

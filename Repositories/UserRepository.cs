@@ -70,11 +70,10 @@ namespace AuthoWorkAppp.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = @" UPDATE [User] SET Password = @Password, Name = @Name, LastName = @LastName, Email = @Email
+                command.CommandText = @" UPDATE [User] SET Name = @Name, LastName = @LastName, Email = @Email
                 WHERE Id = @Id AND Username = @Username";
                 command.Parameters.AddWithValue("@Id", EditedUserModel.Id);
                 command.Parameters.AddWithValue("@Username", EditedUserModel.Username);
-                command.Parameters.AddWithValue("@Password", EditedUserModel.Password);
                 command.Parameters.AddWithValue("@Name", EditedUserModel.Name);
                 command.Parameters.AddWithValue("@LastName", EditedUserModel.LastName);
                 command.Parameters.AddWithValue("@Email", EditedUserModel.Email);
@@ -207,11 +206,27 @@ namespace AuthoWorkAppp.Repositories
 
                 isUserExist = command.ExecuteScalar() == null ? true : false;
             }
-            return isUserExist;
+            return isUserExist; 
         }
 
         public void Remove(string id)
         {
+            using(var connection = GetConnection())
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+
+                Guid userGuid;
+                if (!Guid.TryParse(id, out userGuid))
+                {
+                    throw new ArgumentException("UserId is not a valid GUID");
+                }
+                command.CommandText = "Delete From [User] Where Id = @Id";
+                command.Parameters.Add("@Id", System.Data.SqlDbType.UniqueIdentifier).Value = userGuid;
+
+                command.ExecuteScalar();
+            }
         }
     }
 }

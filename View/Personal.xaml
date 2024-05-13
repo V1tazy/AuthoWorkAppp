@@ -11,5 +11,19 @@
         <vm:PersonalViewModel/>
     </UserControl.DataContext>
     <Grid Margin="15">
+        <Border CornerRadius="0 20 20 0" Background="#FFCF48"/>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="Логин:"/>
+            <TextBox Width="200" IsReadOnly="True" Text="{Binding CurrentUser.Username}"></TextBox>
+            <TextBlock Text="Имя:" Width="200"/>
+            <TextBox Text="{Binding CurrentUser.Name}" IsReadOnly="True"/>
+            <TextBlock Text="Фамилия:"></TextBlock>
+            <TextBox Text="{Binding CurrentUser.LastName}" IsReadOnly="True"></TextBox>
+            <TextBlock Text="Почта:" />
+            <TextBox Text="{Binding CurrentUser.Email}"></TextBox>
+
+            <Button Margin="5" Background="#9966FC" Command="{Binding PersonalEditCommand}">Редактировать</Button>
+        </StackPanel>
     </Grid>
 </UserControl>
